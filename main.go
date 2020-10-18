@@ -7,8 +7,8 @@ import (
 	"net"
 	"os"
 
-	orig "github.com/nobonobo/tls/orig/net"
-	"github.com/nobonobo/tls/orig/tls"
+	"github.com/nobonobo/tinygo-tls/orig/crypto/tls"
+	orig "github.com/nobonobo/tinygo-tls/orig/net"
 )
 
 // Conn ...
@@ -37,13 +37,17 @@ func main() {
 	if err != nil {
 		log.Panic(err)
 	}
+	log.Println("connected")
 	conn := tls.Client(&Conn{raw}, &tls.Config{
 		InsecureSkipVerify: true,
 	})
+	log.Println("Handshake...")
 	if err := conn.Handshake(); err != nil {
 		log.Panic(err)
 	}
+	log.Println("Write Header...")
 	fmt.Fprint(conn, header)
+	log.Println("Receive Response...")
 	if _, err := io.Copy(os.Stdout, conn); err != nil {
 		if err != io.EOF {
 			log.Panic(err)
