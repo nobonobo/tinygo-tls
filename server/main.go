@@ -19,6 +19,9 @@ func main() {
 	l, err := tls.Listen("tcp", "localhost:8443", &tls.Config{
 		Certificates: []tls.Certificate{cert},
 	})
+	if err != nil {
+		log.Fatal(err)
+	}
 	http.HandleFunc("/", index)
 	if err := http.Serve(l, nil); err != nil {
 		log.Panic(err)
