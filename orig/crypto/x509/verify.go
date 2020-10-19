@@ -8,7 +8,8 @@ import (
 	"fmt"
 	"strings"
 	"time"
-	"unicode/utf8"
+
+	//"unicode/utf8"
 
 	"github.com/nobonobo/tinygo-tls/orig/net"
 )
@@ -353,12 +354,14 @@ func toLowerCaseASCII(in string) string {
 	// If the string is already lower-case then there's nothing to do.
 	isAlreadyLowerCase := true
 	for _, c := range in {
-		if c == utf8.RuneError {
-			// If we get a UTF-8 error then there might be
-			// upper-case ASCII bytes in the invalid sequence.
-			isAlreadyLowerCase = false
-			break
-		}
+		/*
+			if c == utf8.RuneError {
+				// If we get a UTF-8 error then there might be
+				// upper-case ASCII bytes in the invalid sequence.
+				isAlreadyLowerCase = false
+				break
+			}
+		*/
 		if 'A' <= c && c <= 'Z' {
 			isAlreadyLowerCase = false
 			break

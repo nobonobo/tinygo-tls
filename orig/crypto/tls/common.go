@@ -5,7 +5,6 @@
 package tls
 
 import (
-	"crypto"
 	"crypto/rand"
 	"io"
 	"math/big"
@@ -13,6 +12,7 @@ import (
 	"sync"
 	"time"
 
+	"github.com/nobonobo/tinygo-tls/orig/crypto"
 	"github.com/nobonobo/tinygo-tls/orig/crypto/x509"
 )
 

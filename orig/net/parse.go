@@ -7,69 +7,6 @@
 
 package net
 
-import (
-	"io"
-	"os"
-)
-
-type file struct {
-	file  *os.File
-	data  []byte
-	atEOF bool
-}
-
-func (f *file) close() { f.file.Close() }
-
-func (f *file) getLineFromData() (s string, ok bool) {
-	data := f.data
-	i := 0
-	for i = 0; i < len(data); i++ {
-		if data[i] == '\n' {
-			s = string(data[0:i])
-			ok = true
-			// move data
-			i++
-			n := len(data) - i
-			copy(data[0:], data[i:])
-			f.data = data[0:n]
-			return
-		}
-	}
-	if f.atEOF && len(f.data) > 0 {
-		// EOF, return all we have
-		s = string(data)
-		f.data = f.data[0:0]
-		ok = true
-	}
-	return
-}
-
-func (f *file) readLine() (s string, ok bool) {
-	if s, ok = f.getLineFromData(); ok {
-		return
-	}
-	if len(f.data) < cap(f.data) {
-		ln := len(f.data)
-		n, err := io.ReadFull(f.file, f.data[ln:cap(f.data)])
-		if n >= 0 {
-			f.data = f.data[0 : ln+n]
-		}
-		if err == io.EOF || err == io.ErrUnexpectedEOF {
-			f.atEOF = true
-		}
-	}
-	s, ok = f.getLineFromData()
-	return
-}
-
-func open(name string) (*file, error) {
-	fd, err := os.Open(name)
-	if err != nil {
-		return nil, err
-	}
-	return &file{fd, make([]byte, os.Getpagesize())[0:0], false}, nil
-}
-
 func byteIndex(s string, c byte) int {
 	for i := 0; i < len(s); i++ {
 		if s[i] == c {

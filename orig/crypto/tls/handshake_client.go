@@ -9,7 +9,6 @@ import (
 	"crypto/subtle"
 	"errors"
 	"io"
-	"log"
 	"strconv"
 
 	"github.com/nobonobo/tinygo-tls/orig/crypto/ecdsa"
@@ -36,8 +35,6 @@ func (c *Conn) clientHandshake() error {
 
 	possibleCipherSuites := c.config.cipherSuites()
 	hello.cipherSuites = make([]uint16, 0, len(possibleCipherSuites))
-	log.Println("choice cipher")
-	defer log.Println("end of cipher selection")
 NextCipherSuite:
 	for _, suiteId := range possibleCipherSuites {
 		for _, suite := range cipherSuites {

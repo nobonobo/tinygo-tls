@@ -5,11 +5,11 @@
 package tls
 
 import (
-	"crypto"
 	"crypto/subtle"
 	"errors"
 	"io"
 
+	"github.com/nobonobo/tinygo-tls/orig/crypto"
 	"github.com/nobonobo/tinygo-tls/orig/crypto/ecdsa"
 	"github.com/nobonobo/tinygo-tls/orig/crypto/rsa"
 	"github.com/nobonobo/tinygo-tls/orig/crypto/x509"

@@ -8,7 +8,8 @@ package tls
 import (
 	"encoding/pem"
 	"errors"
-	"io/ioutil"
+
+	//"io/ioutil"
 	"strings"
 
 	"github.com/nobonobo/tinygo-tls/orig/crypto"
@@ -118,6 +119,7 @@ func Dial(network, addr string, config *Config) (*Conn, error) {
 }
 */
 
+/*
 // LoadX509KeyPair reads and parses a public/private key pair from a pair of
 // files. The files must contain PEM encoded data.
 func LoadX509KeyPair(certFile, keyFile string) (cert Certificate, err error) {
@@ -131,6 +133,7 @@ func LoadX509KeyPair(certFile, keyFile string) (cert Certificate, err error) {
 	}
 	return X509KeyPair(certPEMBlock, keyPEMBlock)
 }
+*/
 
 // X509KeyPair parses a public/private key pair from a pair of
 // PEM encoded data.

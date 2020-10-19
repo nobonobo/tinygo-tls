@@ -5,10 +5,10 @@
 package x509
 
 import (
-	"crypto/rsa"
 	"errors"
 	"math/big"
 
+	"github.com/nobonobo/tinygo-tls/orig/crypto/rsa"
 	"github.com/nobonobo/tinygo-tls/orig/encoding/asn1"
 )
 

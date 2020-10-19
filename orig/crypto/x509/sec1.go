@@ -5,12 +5,12 @@
 package x509
 
 import (
-	"crypto/ecdsa"
 	"crypto/elliptic"
 	"errors"
 	"fmt"
 	"math/big"
 
+	"github.com/nobonobo/tinygo-tls/orig/crypto/ecdsa"
 	"github.com/nobonobo/tinygo-tls/orig/encoding/asn1"
 )
 

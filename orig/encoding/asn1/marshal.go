@@ -6,13 +6,12 @@ package asn1
 
 import (
 	"bytes"
-	"errors"
 	"fmt"
 	"io"
 	"math/big"
 	"reflect"
 	"time"
-	"unicode/utf8"
+	//"unicode/utf8"
 )
 
 // A forkableWriter is an in-memory buffer that can be
@@ -509,15 +508,18 @@ func marshalField(out *forkableWriter, v reflect.Value, params fieldParameters) 
 			// This is a string without an explicit string type. We'll use
 			// a PrintableString if the character set in the string is
 			// sufficiently limited, otherwise we'll use a UTF8String.
-			for _, r := range v.String() {
-				if r >= utf8.RuneSelf || !isPrintable(byte(r)) {
-					if !utf8.ValidString(v.String()) {
-						return errors.New("asn1: string not valid UTF-8")
+			/*
+				for _, r := range v.String() {
+					if r >= utf8.RuneSelf || !isPrintable(byte(r)) {
+						if !utf8.ValidString(v.String()) {
+							return errors.New("asn1: string not valid UTF-8")
+						}
+						tag = tagUTF8String
+						break
 					}
-					tag = tagUTF8String
-					break
 				}
-			}
+			*/
+			tag = tagUTF8String
 		} else {
 			tag = params.stringType
 		}
